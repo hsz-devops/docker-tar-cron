@@ -21,12 +21,12 @@ if [ "${USE_DATE_IN_DEST}" == "1" ]; then
     CURRENT_YEAR="${T_STAMP:0:4}"
     CURRENT_MONTH="${T_STAMP:4:2}"
     CURRENT_DAY="${T_STAMP:6:2}"
-    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DAY}/"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DAY}"
 
     ### create backups directory if not present
     mkdir -p "${BACKUP_DIR_DST}"
 else
-    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}"
 fi
 
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
@@ -37,7 +37,7 @@ chown "$1":"$2" "${BACKUP_DIR_DST}"
 
 echo "backup directory: ${BACKUP_DIR_DST}"
 
-TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}${T_STAMP}.tar.gz"
+TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}/${BAK_NAME}.${T_STAMP}.tar.gz"
 
 pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
