@@ -49,4 +49,4 @@ fi
 
 pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
-    "${TAR_CLI} ."
+    ${TAR_CLI} .
