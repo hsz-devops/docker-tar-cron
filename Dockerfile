@@ -2,7 +2,7 @@ FROM ez123/cron:latest
 
 ENV \
     TAR_CRONTAB="0 0 * * *" \
-    TAR_OPTIONS="--archive --timeout=3600" \
+    TAR_OPTIONS="" \
     TAR_UID="0" \
     TAR_GID="0" \
     USE_DATE_IN_DEST="1"
