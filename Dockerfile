@@ -6,6 +6,7 @@ ENV \
     TAR_UID="0" \
     TAR_GID="0" \
     USE_DATE_IN_DEST="1" \
+    TAR_EXCLUDE="" \
     BAK_NAME="untitled"
 
 COPY tar-entrypoint.sh /entrypoint.d/tar.sh

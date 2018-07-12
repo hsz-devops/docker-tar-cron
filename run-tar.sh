@@ -39,11 +39,14 @@ echo "backup directory: ${BACKUP_DIR_DST}"
 
 TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}/${BAK_NAME}.${T_STAMP}.tar.gz"
 
+TAR_CLI="tar c -z"
+
+TAR_CLI="${TAR_CLI} -f ${TAR_ARCHIVE_NAME}"
+
+if [ ! -z "${TAR_EXCLUDE}" ]; then
+    TAR_CLI="${TAR_CLI} --exclude '${TAR_EXCLUDE}'"
+fi
+
 pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
-    tar -cz \
-        ${TAR_OPTIONS} \
-        -f \
-        "${TAR_ARCHIVE_NAME}" \
-        . \
-
+    "${TAR_CLI} ."
