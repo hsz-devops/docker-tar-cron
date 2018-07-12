@@ -26,8 +26,9 @@ if [ "${USE_DATE_IN_DEST}" == "1" ]; then
     ### create backups directory if not present
     mkdir -p "${BACKUP_DIR_DST}"
 else
-    BACKUP_DIR_DST="${BACKUP_ROOT_DST}"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/"
 fi
+
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
 
 ## make sure folder is writeable by the user
@@ -36,7 +37,7 @@ chown "$1":"$2" "${BACKUP_DIR_DST}"
 
 echo "backup directory: ${BACKUP_DIR_DST}"
 
-TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}/${T_STAMP}.tar.gz"
+TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}${T_STAMP}.tar.gz"
 
 pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
@@ -45,3 +46,4 @@ sudo -u "$1" -g "$2" \
         -f \
         "${TAR_ARCHIVE_NAME}" \
         . \
+
