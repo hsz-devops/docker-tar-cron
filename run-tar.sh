@@ -39,14 +39,12 @@ echo "backup directory: ${BACKUP_DIR_DST}"
 
 TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}/${BAK_NAME}.${T_STAMP}.tar.gz"
 
-TAR_CLI="tar c -z"
-
-TAR_CLI="${TAR_CLI} -f ${TAR_ARCHIVE_NAME}"
-
-if [ ! -z "${TAR_EXCLUDE}" ]; then
-    TAR_CLI="${TAR_CLI} --exclude '${TAR_EXCLUDE}'"
-fi
-
 pushd "${BACKUP_ROOT_SRC}"
-sudo -u "$1" -g "$2" \
-    ${TAR_CLI} .
+
+# doing this weird repetition because I could not find out how to add a simple set of single quotes around the ${TAR_EXCLUDE}
+# watch out if you use wildcards
+if [ -z "${TAR_EXCLUDE}" ]; then
+    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} .
+else
+    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} --exclude "${TAR_EXCLUDE}" .
+fi
