@@ -1,4 +1,4 @@
-FROM ez123/cron:latest
+FROM ez123/cron:alpine
 
 ENV \
     TAR_CRONTAB="0 0 * * *" \
@@ -26,8 +26,11 @@ RUN set -x; \
     && mkdir -p \
         /tar_dir/0.src \
         /tar_dir/9.dst \
-    && chmod -R a+rwx \
+    && chmod a+rwx \
         /tar_dir \
+        /tar_dir/9.dst \
+    && chmod a=rx \
+        /tar_dir/0.src \
     && echo done...
 
 VOLUME ["/tar_dir/0.src", "/tar_dir/9.dst"]
