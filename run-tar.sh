@@ -50,7 +50,7 @@ pushd "${BACKUP_ROOT_SRC}"
 # doing this weird repetition because I could not find out how to add a simple set of single quotes around the ${TAR_EXCLUDE}
 # watch out if you use wildcards
 if [ -z "${TAR_EXCLUDE}" ]; then
-    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} .
+    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} ${TAR_OPTIONS} .
 else
-    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} --exclude "${TAR_EXCLUDE}" .
+    sudo -u "$1" -g "$2" tar c -z -f ${TAR_ARCHIVE_NAME} ${TAR_OPTIONS} --exclude "${TAR_EXCLUDE}" .
 fi
