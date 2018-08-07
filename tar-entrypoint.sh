@@ -18,4 +18,4 @@ if ! getent group "${TAR_GROUP}" | grep "${TAR_USER}" &>/dev/null; then
 fi
 
 # Setup our crontab entry
-export CRONTAB_ENTRY="${TAR_CRONTAB} sh /run-tar.sh ${TAR_USER} ${TAR_GROUP}"
+export CRONTAB_ENTRY="${TAR_CRONTAB} bash /run-tar.sh ${TAR_USER} ${TAR_GROUP}"
