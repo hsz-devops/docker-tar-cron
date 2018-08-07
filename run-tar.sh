@@ -14,6 +14,10 @@ BACKUP_ROOT="/tar_dir"
 BACKUP_ROOT_SRC="${BACKUP_ROOT}/0.src"
 BACKUP_ROOT_DST="${BACKUP_ROOT}/9.dst"
 
+ls -la "${BACKUP_ROOT}"     ||true
+ls -la "${BACKUP_ROOT_SRC}" ||true
+ls -la "${BACKUP_ROOT_DST}" ||true
+
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
 
@@ -29,6 +33,7 @@ else
     BACKUP_DIR_DST="${BACKUP_ROOT_DST}"
 fi
 
+ls -la "${BACKUP_DIR_DST}" ||true
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
 
 ## make sure folder is writeable by the user
@@ -39,6 +44,7 @@ echo "backup directory: ${BACKUP_DIR_DST}"
 
 TAR_ARCHIVE_NAME="${BACKUP_DIR_DST}/${BAK_NAME}.${T_STAMP}.tar.gz"
 
+ls -la "${BACKUP_ROOT_SRC}" ||true
 pushd "${BACKUP_ROOT_SRC}"
 
 # doing this weird repetition because I could not find out how to add a simple set of single quotes around the ${TAR_EXCLUDE}
